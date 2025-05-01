@@ -11,7 +11,13 @@ class Database extends PDO{
             $statement->bindParam($key, $value);
         }
         $statement->execute();
-        return $statement->fetchAll($fetchStyle);
+        $result = $statement->fetchAll($fetchStyle);
+        
+        // Log the query and results to console
+        ConsoleLogger::log("Query: " . $sql);
+        ConsoleLogger::log("Results: " . json_encode($result));
+        
+        return $result;
     }
 
     public function insert($table, $data){

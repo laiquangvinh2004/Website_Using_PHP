@@ -6,6 +6,9 @@ class DModel{
         $user = 'root';
         $pass = '1234';
         $this->db = new Database($connect, $user, $pass);
+        
+        // Log database connection
+        ConsoleLogger::log("Database connected successfully");
     }
 }
 ?>

@@ -62,7 +62,7 @@
         </div>
 
         <div class="chart-container">
-            <h3>Bài viết theo danh mục</h3>  
+            <h3>Bài viết theo danh mục</h3>
             <canvas id="postPieChart"></canvas>
         </div>
     </div>
@@ -110,109 +110,6 @@
     </div>
 </div>
 
-<!-- Include Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Product Chart
-    var productCtx = document.getElementById('productPieChart').getContext('2d');
-    var productData = {
-        labels: [
-            <?php
-                $productModel = new productmodel();
-                $categoryData = $productModel->getProductsByCategory();
-                $labels = [];
-                $counts = [];
-                foreach($categoryData as $category) {
-                    $labels[] = "'" . $category['category_name'] . "'";
-                    $counts[] = $category['product_count'];
-                }
-                echo implode(',', $labels);
-            ?>
-        ],
-        datasets: [{
-            data: [
-                <?php echo implode(',', $counts); ?>
-            ],
-            backgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56',
-                '#4BC0C0',
-                '#9966FF',
-                '#FF9F40'
-            ]
-        }]
-    };
-
-    new Chart(productCtx, {
-        type: 'pie',
-        data: productData,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'right'
-                },
-                title: {
-                    display: true,
-                    text: 'Sản phẩm theo danh mục'        
-                }
-            }
-        }
-    });
-
-    // Post Chart
-    var postCtx = document.getElementById('postPieChart').getContext('2d');
-    var postData = {
-        labels: [
-            <?php
-                $postModel = new postmodel();
-                $postCategoryData = $postModel->getPostsByCategory();
-                $postLabels = [];
-                $postCounts = [];
-                foreach($postCategoryData as $category) {
-                    $postLabels[] = "'" . $category['category_name'] . "'";
-                    $postCounts[] = $category['post_count'];
-                }
-                echo implode(',', $postLabels);
-            ?>
-        ],
-        datasets: [{
-            data: [
-                <?php echo implode(',', $postCounts); ?>
-            ],
-            backgroundColor: [
-                '#FF9F40',
-                '#4BC0C0',
-                '#FFCE56',
-                '#36A2EB',
-                '#FF6384',
-                '#9966FF'
-            ]
-        }]
-    };
-
-    new Chart(postCtx, {
-        type: 'pie',
-        data: postData,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'right'
-                },
-                title: {
-                    display: true,
-                    text: 'Bài viết theo danh mục'   
-                }
-            }
-        }
-    });
-});
-</script>
-
 <style>
 .dashboard-stats {
     margin-top: 20px;
@@ -254,18 +151,19 @@ document.addEventListener('DOMContentLoaded', function() {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     flex: 1;
-    min-width: 300px;
+    min-width: 45%;
 }
 
 .chart-container h3 {
     margin: 0 0 20px 0;
     color: #7f8c8d;
     font-size: 16px;
+    text-align: center;
 }
 
 canvas {
-    width: 100%;
-    height: 300px;
+    width: 100% !important;
+    height: 300px !important;
 }
 
 .recent-orders {
@@ -330,4 +228,88 @@ th, td {
     border-bottom: 1px solid #eee;
     font-size: 20px;
 }
+
+@media (max-width: 1200px) {
+    .chart-container {
+        min-width: 100%;
+        width: 100%;
+    }
+}
 </style>
+
+<!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<?php
+    // Get product data
+    $productModel = new productmodel();
+    $categoryData = $productModel->getProductsByCategory();
+    $productLabels = [];
+    $productCounts = [];
+    foreach($categoryData as $category) {
+        $productLabels[] = $category['category_name'];
+        $productCounts[] = (int)$category['product_count'];
+    }
+
+    // Get post data
+    $postModel = new postmodel();
+    $postCategoryData = $postModel->getPostsByCategory();
+    $postLabels = [];
+    $postCounts = [];
+    foreach($postCategoryData as $category) {
+        $postLabels[] = $category['category_name'];
+        $postCounts[] = (int)$category['post_count'];
+    }
+?>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Product Chart
+    var productData = {
+        labels: <?php echo json_encode($productLabels); ?>,
+        datasets: [{
+            data: <?php echo json_encode($productCounts); ?>,
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
+        }]
+    };
+
+    var productCtx = document.getElementById('productPieChart').getContext('2d');
+    new Chart(productCtx, {
+        type: 'pie',
+        data: productData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right'
+                }
+            }
+        }
+    });
+
+    // Post Chart
+    var postData = {
+        labels: <?php echo json_encode($postLabels); ?>,
+        datasets: [{
+            data: <?php echo json_encode($postCounts); ?>,
+            backgroundColor: ['#FF9F40', '#4BC0C0', '#FFCE56', '#36A2EB', '#FF6384', '#9966FF']
+        }]
+    };
+
+    var postCtx = document.getElementById('postPieChart').getContext('2d');
+    new Chart(postCtx, {
+        type: 'pie',
+        data: postData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right'
+                }
+            }
+        }
+    });
+});
+</script>

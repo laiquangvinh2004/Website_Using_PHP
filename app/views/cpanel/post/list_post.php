@@ -36,8 +36,8 @@
       <tr>
         <th class="text-center" style="width: 10%;">Id</th>
         <th class="text-center" style="width: 20%;">Tên bài viết</th>
+        <th class="text-center" style="width: 20%;">Hình ảnh bài viết</th>
         <th class="text-center" style="width: 20%;">Danh mục bài viết</th>
-        <th class="text-center" style="width: 20%;">Hình ảnh</th>
         <th class="text-center" style="width: auto;">Quản lý</th>
       </tr>
     </thead>
