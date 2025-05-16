@@ -77,7 +77,7 @@
                foreach($product_home as $key => $pro_cate){
                   if($cate['id_category_product'] == $pro_cate['id_category_product']){
             ?>
-            <form action ="<?php echo BASE_URL ?>/giohang/themgiohang" method = "POST">
+            <form action ="<?php echo BASE_URL ?>giohang/themgiohang" method = "POST">
             <input type ="hidden" value = "<?php echo $pro_cate['id_product'] ?>" name = "product_id">
             <input type ="hidden" value = "<?php echo $pro_cate['title_product'] ?>" name = "product_title">
             <input type ="hidden" value = "<?php echo $pro_cate['image_product'] ?>" name = "product_image">

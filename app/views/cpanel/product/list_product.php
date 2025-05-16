@@ -7,28 +7,31 @@
     }
 ?>
 
-<h3 style = "text-align: center;">LIỆT KÊ SẢN PHẨM</h3>
-<div class="products-per-page" style="text-align: right; margin-bottom: 20px;">
-    <form action="<?php echo BASE_URL ?>product/list_product" method="GET" style="display: inline-block;">
-        <label for="category">Danh mục:</label>
-        <select name="category" id="category" onchange="this.form.submit()" style="margin-right: 20px;">
-            <option value="">Tất cả danh mục</option>
-            <?php
-            if(isset($categories) && !empty($categories)){
-                foreach($categories as $category){
-                    $selected = (isset($_GET['category']) && $_GET['category'] == $category['id_category_product']) ? 'selected' : '';
-                    echo '<option value="'.$category['id_category_product'].'" '.$selected.'>'.$category['title_category_product'].'</option>';
+<h3 class = "list-product-title">LIỆT KÊ SẢN PHẨM</h3>
+<div class="filter-bar">
+    <form action="<?php echo BASE_URL ?>product/list_product" method="GET" class="filter-form">
+        <div class="filter-group">
+            <label for="category">Danh mục:</label>
+            <select name="category" id="category" onchange="this.form.submit()">
+                <option value="">Tất cả danh mục</option>
+                <?php
+                if(isset($categories) && !empty($categories)){
+                    foreach($categories as $category){
+                        $selected = (isset($_GET['category']) && $_GET['category'] == $category['id_category_product']) ? 'selected' : '';
+                        echo '<option value="'.$category['id_category_product'].'" '.$selected.'>'.$category['title_category_product'].'</option>';
+                    }
                 }
-            }
-            ?>
-        </select>
-        
-        <label for="per_page">Số sản phẩm mỗi trang:</label>
-        <select name="per_page" id="per_page" onchange="this.form.submit()">
-            <option value="10" <?php echo (isset($_GET['per_page']) && $_GET['per_page'] == 10) ? 'selected' : ''; ?>>10</option>
-            <option value="25" <?php echo (isset($_GET['per_page']) && $_GET['per_page'] == 25) ? 'selected' : ''; ?>>25</option>
-            <option value="50" <?php echo (isset($_GET['per_page']) && $_GET['per_page'] == 50) ? 'selected' : ''; ?>>50</option>
-        </select>
+                ?>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="per_page">Số sản phẩm mỗi trang:</label>
+            <select name="per_page" id="per_page" onchange="this.form.submit()">
+                <option value="10" <?php echo (isset($_GET['per_page']) && $_GET['per_page'] == 10) ? 'selected' : ''; ?>>10</option>
+                <option value="25" <?php echo (isset($_GET['per_page']) && $_GET['per_page'] == 25) ? 'selected' : ''; ?>>25</option>
+                <option value="50" <?php echo (isset($_GET['per_page']) && $_GET['per_page'] == 50) ? 'selected' : ''; ?>>50</option>
+            </select>
+        </div>
     </form>
 </div>
 <table class="table table-striped">
@@ -219,5 +222,61 @@ tbody tr:last-child td {
 .pagination-ellipsis {
     padding: 8px 12px;
     color: #6c757d;
+}
+
+.list-product-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #2196F3;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    text-shadow: 1px 2px 8px rgba(33,150,243,0.15);
+    background: linear-gradient(90deg, #2196F3 0%, #21CBF3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.filter-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.filter-group label {
+    margin-bottom: 0;
+}
+.filter-group select {
+    font-size: 2rem;
+    padding: 2px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+@media (max-width: 768px) {
+    .filter-form {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .filter-group {
+        font-size: 1.2rem;
+    }
+    .filter-group select {
+        font-size: 1.2rem;
+    }
 }
 </style>

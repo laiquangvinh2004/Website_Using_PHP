@@ -149,7 +149,7 @@
                         </div>
                      </div>
                      <div class="add_card">
-                        <form action="<?php echo BASE_URL ?>/giohang/themgiohang" method="POST">
+                        <form action="<?php echo BASE_URL ?>giohang/themgiohang" method="POST">
                            <input type="hidden" name="product_id" value="<?php echo $product['id_product'] ?>">
                            <input type="hidden" name="product_title" value="<?php echo $product['title_product'] ?>">
                            <input type="hidden" name="product_image" value="<?php echo $product['image_product'] ?>">

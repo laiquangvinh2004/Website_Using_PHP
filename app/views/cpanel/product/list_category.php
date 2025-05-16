@@ -7,7 +7,7 @@
     }
 ?>
 
-<h3 style = "text-align: center;">LIỆT KÊ DANH MỤC SẢN PHẨM</h3>  
+<h3 class = "list-category-title">LIỆT KÊ DANH MỤC SẢN PHẨM</h3>  
 <table class="table table-striped">
     <thead>
       <tr>
@@ -110,4 +110,19 @@ tbody tr:last-child td {
 .btn-delete:hover {
     background-color: #da190b;
 }
+
+.list-category-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #2196F3;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    text-shadow: 1px 2px 8px rgba(33,150,243,0.15);
+    background: linear-gradient(90deg, #2196F3 0%, #21CBF3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 </style>

@@ -73,7 +73,12 @@
                               <button type="button" class="quantity-btn plus" onclick="increaseQuantity()">+</button>
                            </div>
                         </div>
-                        <form action="<?php echo BASE_URL ?>giohang/themgiohang" method="POST">
+                        <form action="<?php echo BASE_URL ?>giohang/themgiohang" method="POST" onsubmit="console.log('Product added to cart:', { 
+                            id: this.querySelector('[name=product_id]').value,
+                            title: this.querySelector('[name=product_title]').value,
+                            price: this.querySelector('[name=product_price]').value,
+                            quantity: this.querySelector('[name=product_quantity]').value
+                        });">
                            <input type="hidden" name="product_id" value="<?php echo $details['id_product'] ?>">
                            <input type="hidden" name="product_title" value="<?php echo $details['title_product'] ?>">
                            <input type="hidden" name="product_image" value="<?php echo $details['image_product'] ?>">

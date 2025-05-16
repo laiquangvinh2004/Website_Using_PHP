@@ -7,14 +7,20 @@
     }
 ?>
 
-<h3 style = "text-align : center">THÊM SẢN PHẨM</h3>        
+<h2 class="add-product-title">THÊM SẢN PHẨM</h2>
 <div class = "col-md-12">
-    <form action="<?php echo BASE_URL ?>product/insert_product" method = "POST" enctype = "multipart/form-data" onsubmit="return validateFile()">
+    <form action="<?php echo BASE_URL ?>product/insert_product" method = "POST" enctype = "multipart/form-data" onsubmit="return validateFile()" onsuccess="console.log('Product added successfully:', {
+        title: this.querySelector('[name=title_product]').value,
+        price: this.querySelector('[name=price_product]').value,
+        quantity: this.querySelector('[name=quantity_product]').value,
+        category: this.querySelector('[name=category_product]').options[this.querySelector('[name=category_product]').selectedIndex].text,
+        isHot: this.querySelector('[name=product_hot]').value === '1' ? 'Yes' : 'No'
+    });">
     <div class="form-group">
         <label for="email">Tên sản phẩm</label>
         <input type="text" name = "title_product" class="form-control" required>
     </div>
-    <div class="form-group"></div>
+    <div class="form-group">
         <label for="email">Hình ảnh sản phẩm</label>
         <input type="file" name = "image_product" id="image_product" class="form-control" accept=".jpg,.jpeg,.png" required>
         <small class="text-muted">Chỉ chấp nhận file JPG và PNG</small>
@@ -96,5 +102,18 @@ document.querySelector('input[name="price_product"]').addEventListener('input', 
     font-size: 14px;
     margin-top: 5px;
     display: block;
+}
+.add-product-title {
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+    color: #2196F3;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    text-shadow: 1px 2px 8px rgba(33,150,243,0.15);
+    background: linear-gradient(90deg, #2196F3 0%, #21CBF3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 </style>

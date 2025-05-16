@@ -8,7 +8,7 @@
 ?>
 
 <div class="post-edit">
-    <h2>Cập nhật bài viết</h2>
+    <h2 class = "post-edit-title">Cập nhật bài viết</h2>
     
     <div class="form-container">
         <?php
@@ -207,5 +207,19 @@ function validateFile() {
     font-size: 14px;
     margin-top: 5px;
     display: block;
+}
+
+.post-edit-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #2196F3;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    text-shadow: 1px 2px 8px rgba(33,150,243,0.15);
+    background: linear-gradient(90deg, #2196F3 0%, #21CBF3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 </style>

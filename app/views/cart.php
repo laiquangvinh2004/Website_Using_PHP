@@ -29,7 +29,7 @@
         <!-- Cart Content -->
         <div class="cart-content">
             <?php if(isset($_SESSION['shopping_cart']) && !empty($_SESSION['shopping_cart'])): ?>
-                <form action="<?php echo BASE_URL ?>/giohang/updategiohang" method="post">
+                <form action="<?php echo BASE_URL ?>giohang/updategiohang" method="post">
                     <div class="cart-items">
                         <?php
                         $total = 0;
@@ -94,7 +94,7 @@
                 <!-- Checkout Form -->
                 <div id="checkout-form" class="checkout-section">
                     <h2>Thông tin đặt hàng</h2>
-                    <form name="FormDatHang" method="POST" action="<?php echo BASE_URL ?>/giohang/dathang" class="checkout-form">
+                    <form name="FormDatHang" method="POST" action="<?php echo BASE_URL ?>giohang/dathang" class="checkout-form">
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Họ và tên</label>
@@ -108,7 +108,15 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Email (Chú ý nhập đúng email đã tạo tài khoản)</label>
-                                <input type="email" name="email" required>
+                                <?php 
+                                // Debug session
+                                echo "<!-- Debug: ";
+                                print_r($_SESSION);
+                                echo " -->";
+                                ?>
+                                <input type="email" name="email" required 
+                                    value="<?php echo isset($_SESSION['customer_email']) ? $_SESSION['customer_email'] : ''; ?>"
+                                    <?php echo isset($_SESSION['customer_email']) ? 'readonly' : ''; ?>>
                             </div>
                             <div class="form-group">
                                 <label>Địa chỉ</label>
